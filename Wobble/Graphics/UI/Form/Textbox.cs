@@ -125,6 +125,8 @@ namespace Wobble.Graphics.UI.Form
         ///     If true, it'll allow the textbox to be submitted.
         /// </summary>
         public bool AllowSubmission { get; set; } = true;
+        
+        public bool ClearOnSubmission { get; set; } = true;
 
         /// <summary>
         ///     The amount of time since the user has stopped typing, so that
@@ -547,9 +549,12 @@ namespace Wobble.Graphics.UI.Form
                 OnSubmit?.Invoke(RawText);
 
                 // Clear text box.
-                RawText = "";
-                Selected = false;
-                ReadjustTextbox();
+                if (ClearOnSubmission)
+                {
+                    RawText = "";
+                    Selected = false;
+                    ReadjustTextbox();
+                }
             }
         }
 
